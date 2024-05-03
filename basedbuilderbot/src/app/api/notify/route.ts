@@ -1,17 +1,26 @@
+import Error from 'next/error';
+import { type NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic'; // defaults to auto
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   console.log('Request received:');
   console.log(request);
   return new Response('GET /api/notify', { status: 200 });
 }
 
 export async function POST(request: Request) {
-  console.log('Request received:');
-  console.log(request);
-  // sample data packet
+  try {
+    const text = await request.text();
+    const payload = JSON.parse(text);
+    console.log('Webhook received:', payload);
+    // Process the webhook payload
+  } catch (error: any) {
+    return new Response(`Webhook error: ${error.message}`, {
+      status: 400,
+    });
+  }
 
-  return new Response('GET /api/notify', { status: 200 });
+  return new Response('Success! Webhook received', { status: 200 });
 }
 
 // sample data received in webhook
