@@ -1,3 +1,4 @@
+import { recast } from '@/app/utils/bot';
 import Error from 'next/error';
 import { type NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic'; // defaults to auto
@@ -12,7 +13,14 @@ export async function POST(request: Request) {
   try {
     const text = await request.text();
     const payload = JSON.parse(text);
-    console.log('Webhook received:', payload);
+    console.log('Webhook received:', payload.data.hash);
+
+    const recat_res = await recast(payload.data.hash);
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    console.log('Recasted Hash:', payload.data.hash);
+    console.log('Recast response:', recat_res);
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+
     // Process the webhook payload
   } catch (error: any) {
     return new Response(`Webhook error: ${error.message}`, {
@@ -23,43 +31,38 @@ export async function POST(request: Request) {
   return new Response('Success! Webhook received', { status: 200 });
 }
 
-// sample data received in webhook
-// {
-//   created_at: 1708025006,
-//   type: "cast.created",
-//   data: {
-//     object: "cast",
-//     hash: "0xfe7908021a4c0d36d5f7359975f4bf6eb9fbd6f2",
-//     thread_hash: "0xfe7908021a4c0d36d5f7359975f4bf6eb9fbd6f2",
-//     parent_hash: null,
-//     parent_url: "chain://eip155:1/erc721:0xfd8427165df67df6d7fd689ae67c8ebf56d9ca61",
-//     root_parent_url: "chain://eip155:1/erc721:0xfd8427165df67df6d7fd689ae67c8ebf56d9ca61",
-//     parent_author: {
-//       fid: null,
-//     },
-//     author: {
-//       object: "user",
-//       fid: 234506,
-//       custody_address: "0x3ee6076e78c6413c8a3e1f073db01f87b63923b0",
-//       username: "balzgolf",
-//       display_name: "Balzgolf",
-//       pfp_url: "https://i.imgur.com/U7ce6gU.jpg",
-//       profile: [Object ...],
-//       follower_count: 65,
-//       following_count: 110,
-//       verifications: [ "0x8c16c47095a003b726ce8deffc39ee9cb1b9f124" ],
-//       active_status: "inactive",
-//     },
-//     text: "LFG",
-//     timestamp: "2024-02-15T19:23:22.000Z",
-//     embeds: [],
-//     reactions: {
-//       likes: [],
-//       recasts: [],
-//     },
-//     replies: {
-//       count: 0,
-//     },
-//     mentioned_profiles: [],
-//   },
-// }
+// Sample Data
+// Webhook received: {
+//     created_at: 1714810457,
+//     type: 'cast.created',
+//     data: {
+//       object: 'cast',
+//       hash: '0x23e3390edbd2f50190a898874735c493a177f4cf',
+//       thread_hash: '0x23e3390edbd2f50190a898874735c493a177f4cf',
+//       parent_hash: null,
+//       parent_url: null,
+//       root_parent_url: null,
+//       parent_author: { fid: null },
+//       author: {
+//         object: 'user',
+//         fid: 224616,
+//         custody_address: '0x86023df0d3e67eb808d3bda522d3daae2562a7d2',
+//         username: 'arunank',
+//         display_name: 'Arunank Sharan',
+//         pfp_url: 'https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/2c7cd249-4668-4772-be20-f3369b494700/original',
+//         profile: [Object],
+//         follower_count: 63,
+//         following_count: 107,
+//         verifications: [Array],
+//         verified_addresses: [Object],
+//         active_status: 'inactive',
+//         power_badge: false
+//       },
+//       text: 'Test @basedbuildersbot',
+//       timestamp: '2024-05-04T08:14:14.000Z',
+//       embeds: [],
+//       reactions: { likes_count: 0, recasts_count: 0, likes: [], recasts: [] },
+//       replies: { count: 0 },
+//       mentioned_profiles: []
+//     }
+//   }
