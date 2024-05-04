@@ -1,25 +1,33 @@
-import { recast } from '@/app/utils/bot';
-import Error from 'next/error';
-import { type NextRequest } from 'next/server';
-export const dynamic = 'force-dynamic'; // defaults to auto
+import { recast, castToChannel } from "@/app/utils/bot";
+import Error from "next/error";
+import { type NextRequest } from "next/server";
+export const dynamic = "force-dynamic"; // defaults to auto
 
 export async function GET(request: NextRequest) {
-  console.log('Request received:');
+  console.log("Request received:");
   console.log(request);
-  return new Response('GET /api/notify', { status: 200 });
+  return new Response("GET /api/notify", { status: 200 });
 }
 
 export async function POST(request: Request) {
   try {
     const text = await request.text();
     const payload = JSON.parse(text);
-    console.log('Webhook received:', payload.data.hash);
+    console.log("Webhook received:", payload.data.hash);
 
-    const recat_res = await recast(payload.data.hash);
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-    console.log('Recasted Hash:', payload.data.hash);
-    console.log('Recast response:', recat_res);
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    let cast_res = await castToChannel(
+      {
+        display_name: payload.data.author.display_name,
+        username: payload.data.author.username,
+        text: payload.data.text,
+      },
+      payload.data.embeds
+    );
+
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log("Recasted Hash:", payload.data.hash);
+    console.log("Recast response:", cast_res);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
     // Process the webhook payload
   } catch (error: any) {
@@ -28,7 +36,7 @@ export async function POST(request: Request) {
     });
   }
 
-  return new Response('Success! Webhook received', { status: 200 });
+  return new Response("Success! Webhook received", { status: 200 });
 }
 
 // Sample Data
