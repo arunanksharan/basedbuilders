@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     const payload = JSON.parse(text);
     console.log('Webhook received:', payload);
 
+<<<<<<< Updated upstream
     try {
       let cast_res = await castToChannel(
         {
@@ -32,9 +33,17 @@ export async function POST(request: Request) {
     // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     // console.log('Recasted Hash:', payload.data.hash);
     // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+=======
+    const recast_res = await recast(payload.data.hash);
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    console.log('Recasted Hash:', payload.data.hash);
+    console.log('Recast response:', recast_res);
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+>>>>>>> Stashed changes
 
     // Process the webhook payload
   } catch (error: any) {
+    console.error('Webhook error:', error);
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
     });
