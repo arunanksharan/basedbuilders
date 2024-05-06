@@ -17,6 +17,7 @@ export async function POST(request: Request) {
 
     const rawMessage = payload.data.text;
     const message = process_message(rawMessage); // rawMessage.replace(/@basedbuilders/g, '');
+    console.log('Processed message:', message);
 
     let cast_res = await castToChannel(
       {
