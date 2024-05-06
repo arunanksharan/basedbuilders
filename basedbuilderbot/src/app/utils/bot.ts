@@ -43,6 +43,7 @@ export const castToChannel = async (
 
 export const process_message = (message: string) => {
   let result = message.replace(/@basedbuildersbot/g, '');
+  result.replace(/@undefined/g, '').trim();
   result.replace('Description', '').trim();
   return result;
 };
