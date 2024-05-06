@@ -1,4 +1,4 @@
-import { recast, castToChannel } from '@/app/utils/bot';
+import { recast, castToChannel, process_message } from '@/app/utils/bot';
 import Error from 'next/error';
 import { type NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic'; // defaults to auto
@@ -15,31 +15,22 @@ export async function POST(request: Request) {
     const payload = JSON.parse(text);
     console.log('Webhook received:', payload);
 
-<<<<<<< Updated upstream
-    try {
-      let cast_res = await castToChannel(
-        {
-          display_name: payload.data.author.display_name,
-          username: payload.data.author.username,
-          text: payload.data.text,
-        },
-        payload.data.embeds
-      );
-      console.log('Recast response:', cast_res);
-    } catch (error) {
-      console.log('Error casting to channel:', error);
-    }
+    const rawMessage = payload.data.text;
+    const message = process_message(rawMessage); // rawMessage.replace(/@basedbuilders/g, '');
+
+    let cast_res = await castToChannel(
+      {
+        //   display_name: payload.data.author.display_name,
+        username: payload.data.author.username,
+        text: message,
+      },
+      payload.data.embeds
+    );
+    console.log('Recast response:', cast_res);
 
     // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     // console.log('Recasted Hash:', payload.data.hash);
     // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-=======
-    const recast_res = await recast(payload.data.hash);
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-    console.log('Recasted Hash:', payload.data.hash);
-    console.log('Recast response:', recast_res);
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
->>>>>>> Stashed changes
 
     // Process the webhook payload
   } catch (error: any) {

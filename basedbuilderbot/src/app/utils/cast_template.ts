@@ -1,7 +1,5 @@
-const template = `Description (be specific on details and any criteria for completing e.g. favorite answer wins, apply to work on this)
+const template = `Description (what do you wanna built out? Being specific & detailed about your requirements will help get better reponses)
 
-Amount (USDC, ETH, OP, Warps, degen, higher, or SOL)
+@basedbuildersbot `;
 
-Deadline MM/DD/YYYY (optional, defaults to 2 weeks)
-
-@bountybot `;
+// Sample message: Description Can someone build out a frame to mint NFTs? I need a frame that can mint NFTs on the Ethereum blockchain. The frame should have the following features: whitelisting and minting @basedbuildersbot
