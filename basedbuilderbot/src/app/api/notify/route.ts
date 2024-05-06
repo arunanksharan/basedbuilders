@@ -1,4 +1,9 @@
-import { recast, castToChannel, process_message } from '@/app/utils/bot';
+import {
+  recast,
+  castToChannel,
+  process_message,
+  fetch_parent_cast,
+} from '@/app/utils/bot';
 import Error from 'next/error';
 import { type NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic'; // defaults to auto
@@ -15,14 +20,26 @@ export async function POST(request: Request) {
     const payload = JSON.parse(text);
     console.log('Webhook received:', payload);
 
-    const rawMessage = payload.data.text;
+    let rawMessage = '';
+    let username = '';
+
+    // Check for parent hash
+    if (payload.data.parent_hash) {
+      // Recast the parent cast
+      const parent_cast = await fetch_parent_cast(payload.data.parent_hash);
+      rawMessage = parent_cast.cast.text;
+      username = parent_cast.cast.author.username;
+    } else {
+      rawMessage = payload.data.text;
+      username = payload.data.author.username;
+    }
     const message = process_message(rawMessage); // rawMessage.replace(/@basedbuilders/g, '');
     console.log('Processed message:', message);
 
     let cast_res = await castToChannel(
       {
         //   display_name: payload.data.author.display_name,
-        username: payload.data.author.username,
+        username: username,
         text: message,
       },
       payload.data.embeds

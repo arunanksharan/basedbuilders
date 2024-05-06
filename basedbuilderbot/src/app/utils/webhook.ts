@@ -74,3 +74,39 @@ const uname_undefined = {
     mentioned_profiles: [[Object]],
   },
 };
+
+const webhook_body_from_replies = {
+  created_at: 1715028070,
+  type: 'cast.created',
+  data: {
+    object: 'cast',
+    hash: '0x593df31e69147cbc37615e018b0ed7dc11146fe9',
+    thread_hash: '0x3945d83298b7fd98ccbc1e49e5e366a50ed4f626',
+    parent_hash: '0x3945d83298b7fd98ccbc1e49e5e366a50ed4f626',
+    parent_url: null,
+    root_parent_url: null,
+    parent_author: { fid: 224616 },
+    author: {
+      object: 'user',
+      fid: 224616,
+      custody_address: '0x86023df0d3e67eb808d3bda522d3daae2562a7d2',
+      username: 'arunank',
+      display_name: 'Arunank Sharan',
+      pfp_url:
+        'https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/2c7cd249-4668-4772-be20-f3369b494700/original',
+      profile: [Object],
+      follower_count: 62,
+      following_count: 109,
+      verifications: [Array],
+      verified_addresses: [Object],
+      active_status: 'inactive',
+      power_badge: false,
+    },
+    text: 'Testing pickup by replies @undefined',
+    timestamp: '2024-05-06T20:41:05.000Z',
+    embeds: [],
+    reactions: { likes_count: 0, recasts_count: 0, likes: [], recasts: [] },
+    replies: { count: 0 },
+    mentioned_profiles: [[Object]],
+  },
+};
