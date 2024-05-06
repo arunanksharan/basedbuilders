@@ -34,7 +34,7 @@ export const castToChannel = async (
     config = { ...config, embeds };
   }
 
-  let messageTemplate = `${message.text}\n Posted by: ${message.username}`;
+  let messageTemplate = `${message.text}\n Posted by: @${message.username}`;
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
   console.log('Cast to channel response:', res);
