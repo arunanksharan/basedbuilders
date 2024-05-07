@@ -23,9 +23,11 @@ export async function POST(request: Request) {
 
     let db_res = await savecast.save();
 
-    return new Response("Success! save completed", {
-      status: 201,
-    });
+    if (db_res) {
+      return new Response("Success! save completed", {
+        status: 201,
+      });
+    }
   } catch (error: any) {
     console.error("save :", error);
     return new Response(`save : ${error.message}`, {

@@ -31,4 +31,4 @@ const saveCastSchema = new mongoose.Schema(
 const SaveCast =
   mongoose.models.SaveCast || mongoose.model("SaveCast", saveCastSchema);
 
-module.exports = SaveCast;
+export default SaveCast;
