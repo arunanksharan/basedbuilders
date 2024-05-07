@@ -3,6 +3,7 @@ import {
   NeynarAPIClient,
   isApiErrorResponse,
 } from "@neynar/nodejs-sdk";
+import axios from "axios";
 
 const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY;
 const SIGNER_KEY = process.env.SIGNER;
@@ -41,6 +42,8 @@ export const castToChannel = async (
 
   let messageTemplate = `${message.text}\nCasted by: @${message.username}`;
 
+  await saveCast(message, messageTemplate, castUrl, embeds);
+
   if (messageTemplate.length >= 320) {
     messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
   }
@@ -66,3 +69,27 @@ export const fetch_parent_cast = async (parentHash: string) => {
   // console.log(res);
   return res;
 };
+
+async function saveCast(
+  message: { username: string; text: string },
+  messageTemplate: string,
+  castUrl: string,
+  embeds: { url: string }[] | undefined
+) {
+  try {
+    let savecast = {
+      username: message.username,
+      message: messageTemplate,
+      castUrl: castUrl,
+      embeds: embeds || [],
+    };
+
+    let save_res = await axios.post("/api/savecast", savecast);
+
+    if (save_res.status == 201) {
+      console.log("Cast Saved", savecast);
+    }
+  } catch (er) {
+    console.log("save error : ", er);
+  }
+}
