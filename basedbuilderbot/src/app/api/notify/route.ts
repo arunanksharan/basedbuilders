@@ -3,25 +3,26 @@ import {
   castToChannel,
   process_message,
   fetch_parent_cast,
-} from '@/app/utils/bot';
-import Error from 'next/error';
-import { type NextRequest } from 'next/server';
-export const dynamic = 'force-dynamic'; // defaults to auto
+} from "@/app/utils/bot";
+import Error from "next/error";
+import { type NextRequest } from "next/server";
+export const dynamic = "force-dynamic"; // defaults to auto
 
 export async function GET(request: NextRequest) {
-  console.log('Request received:');
+  console.log("Request received:");
   console.log(request);
-  return new Response('GET /api/notify', { status: 200 });
+  return new Response("GET /api/notify", { status: 200 });
 }
 
 export async function POST(request: Request) {
   try {
     const text = await request.text();
     const payload = JSON.parse(text);
-    console.log('Webhook received:', payload);
+    console.log("Webhook received:", payload);
 
-    let rawMessage = '';
-    let username = '';
+    let rawMessage = "";
+    let username = "";
+    let castUrl = "";
 
     // Check for parent hash
     if (payload.data.parent_hash) {
@@ -29,12 +30,16 @@ export async function POST(request: Request) {
       const parent_cast = await fetch_parent_cast(payload.data.parent_hash);
       rawMessage = parent_cast.cast.text;
       username = parent_cast.cast.author.username;
+      let hashid = payload.data.parent_hash.slice(0, 8);
+      castUrl = `https://warpcast.com/${username}/${hashid}`;
     } else {
       rawMessage = payload.data.text;
       username = payload.data.author.username;
+      let hashid = payload.data.hash.slice(0, 8);
+      castUrl = `https://warpcast.com/${username}/${hashid}`;
     }
     const message = process_message(rawMessage); // rawMessage.replace(/@basedbuilders/g, '');
-    console.log('Processed message:', message);
+    console.log("Processed message:", message);
 
     let cast_res = await castToChannel(
       {
@@ -42,9 +47,10 @@ export async function POST(request: Request) {
         username: username,
         text: message,
       },
+      castUrl,
       payload.data.embeds
     );
-    console.log('Recast response:', cast_res);
+    console.log("Recast response:", cast_res);
 
     // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     // console.log('Recasted Hash:', payload.data.hash);
@@ -52,13 +58,13 @@ export async function POST(request: Request) {
 
     // Process the webhook payload
   } catch (error: any) {
-    console.error('Webhook error:', error);
+    console.error("Webhook error:", error);
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
     });
   }
 
-  return new Response('Success! Webhook received', { status: 200 });
+  return new Response("Success! Webhook received", { status: 200 });
 }
 
 // Sample Data
