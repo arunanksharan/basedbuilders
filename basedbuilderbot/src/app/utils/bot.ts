@@ -85,9 +85,9 @@ async function saveCast(
   castUrl: string,
   embeds: { url: string }[] | undefined
 ) {
-  await dbconfig();
-
   try {
+    await dbconfig();
+
     let cast = {
       username: message.username,
       message: messageTemplate,
