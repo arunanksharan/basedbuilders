@@ -51,14 +51,13 @@ export const castToChannel = async (
 
   let messageTemplate = `${message.text}\nCasted by: @${message.username}`;
 
-  await saveCast(message, messageTemplate, castUrl, embeds);
-
   if (messageTemplate.length >= 320) {
     messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
   }
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
   console.log("Cast to channel response:", res);
+  await saveCast(message, messageTemplate, castUrl, embeds);
   return res;
 };
 
