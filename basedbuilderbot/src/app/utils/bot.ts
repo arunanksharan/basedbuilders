@@ -49,7 +49,8 @@ export const castToChannel = async (
   let embedsUrls: { url: string }[] = [];
 
   if (messageTemplate.length >= 320) {
-    messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
+    // messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
+    messageTemplate = `Casted by: @${message.username}`;
     embedsUrls = [{ url: castUrl }];
   }
 
