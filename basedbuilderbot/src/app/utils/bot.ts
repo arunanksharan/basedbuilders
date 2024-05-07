@@ -45,19 +45,23 @@ export const castToChannel = async (
     channelId: "basedbuilders",
   };
 
-  if (embeds && embeds.length > 0) {
-    config = { ...config, embeds };
-  }
-
   let messageTemplate = `${message.text}\nCasted by: @${message.username}`;
+  let embedsUrls: { url: string }[] = [];
 
   if (messageTemplate.length >= 320) {
     messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
+    embedsUrls = [{ url: castUrl }];
   }
+
+  if (embeds && embeds.length > 0) {
+    embedsUrls = [...embedsUrls, ...embeds];
+  }
+
+  config = { ...config, embeds: embedsUrls };
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
   console.log("Cast to channel response:", res);
-  await saveCast(message, messageTemplate, castUrl, embeds);
+  await saveCast(message, messageTemplate, castUrl, embedsUrls);
   return res;
 };
 
@@ -91,7 +95,7 @@ async function saveCast(
       username: message.username,
       message: messageTemplate,
       castUrl: castUrl,
-      embeds: embeds || [],
+      embed: embeds || [],
     };
 
     let savecast = new SaveCast({
