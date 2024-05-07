@@ -1,4 +1,3 @@
-import { type NextRequest } from "next/server";
 export const dynamic = "force-dynamic"; // defaults to auto
 import dbconfig from "../../utils/dbconfig";
 import SaveCast from "./../../models/savecast";
