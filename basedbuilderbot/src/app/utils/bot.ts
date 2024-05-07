@@ -4,6 +4,15 @@ import {
   isApiErrorResponse,
 } from "@neynar/nodejs-sdk";
 import axios from "axios";
+import dbconfig from "../../app/utils/dbconfig";
+import SaveCast from "../../app/models/savecast";
+
+type SaveCastType = {
+  username: string;
+  message: string;
+  castUrl: string;
+  embed: { url: string }[];
+};
 
 const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY;
 const SIGNER_KEY = process.env.SIGNER;
@@ -76,18 +85,24 @@ async function saveCast(
   castUrl: string,
   embeds: { url: string }[] | undefined
 ) {
+  await dbconfig();
+
   try {
-    let savecast = {
+    let cast = {
       username: message.username,
       message: messageTemplate,
       castUrl: castUrl,
       embeds: embeds || [],
     };
 
-    let save_res = await axios.post("/api/savecast", savecast);
+    let savecast = new SaveCast({
+      ...cast,
+    });
 
-    if (save_res.status == 201) {
-      console.log("Cast Saved", savecast);
+    let db_res = await savecast.save();
+
+    if (db_res) {
+      console.log("Cast saved", cast);
     }
   } catch (er) {
     console.log("save error : ", er);
