@@ -7,23 +7,29 @@ import ogImage from "../app/assets/og.png";
 const template = `Description (what do you wanna built out? Being specific & detailed about your requirements will help get better reponses)
 
 @basedbuildersbot `;
-let casturl = `https://warpcast.com/~/compose?text=${encodeURIComponent(
+
+let CAST_URL = `https://warpcast.com/~/compose?text=${encodeURIComponent(
   template
 )}`;
 
-let ogImageurl = ogImage.src;
+let OG_IMAGE = ogImage.src;
 
+//replace with env for HOST
+let CLIENT_URL = "https://basedbuilders.vercel.app";
 export const metadata = {
   title: "Basedbuilderbot",
   openGraph: {
-    images: [ogImageurl],
+    images: [OG_IMAGE],
   },
   other: {
-    "fc:frame:image": ogImageurl,
+    "fc:frame:image": `${CLIENT_URL}/${OG_IMAGE}`,
     "fc:frame": "vNext",
     "fc:frame:button:1": "Cast Query",
     "fc:frame:button:1:action": "link",
-    "fc:frame:button:1:target": casturl,
+    "fc:frame:button:1:target": CAST_URL,
+    "fc:frame:button:2": "FAQ",
+    "fc:frame:button:2:action": "link",
+    "fc:frame:button:2:target": `${CLIENT_URL}/faq`,
   },
 };
 
