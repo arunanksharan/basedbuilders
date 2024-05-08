@@ -1,4 +1,31 @@
 import Image from "next/image";
+import { Metadata } from "next";
+import ogImage from "../app/assets/og.png";
+
+// either Static metadata
+
+const template = `Description (what do you wanna built out? Being specific & detailed about your requirements will help get better reponses)
+
+@basedbuildersbot `;
+let casturl = `https://warpcast.com/~/compose?text=${encodeURIComponent(
+  template
+)}`;
+
+let ogImageurl = ogImage.src;
+
+export const metadata = {
+  title: "Basedbuilderbot",
+  openGraph: {
+    images: [ogImageurl],
+  },
+  other: {
+    "fc:frame:image": ogImageurl,
+    "fc:frame": "vNext",
+    "fc:frame:button:1": "Cast Query",
+    "fc:frame:button:1:action": "link",
+    "fc:frame:button:1:target": casturl,
+  },
+};
 
 export default function Home() {
   return (
