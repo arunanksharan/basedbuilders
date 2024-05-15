@@ -15,11 +15,7 @@ Amount 250 USDC + 250 DEGEN
 Due 05/31/2024
 
 ### Response: 
-**Title:**
-Solidity smart contract developer for Micro Dapp and Frames
-
-**Keywords:**
-solidity, smart contract, developer, micro dApp, frame, UX, website, front-end, UI, development, USDC, DEGEN
+{"title": "Solidity smart contract developer for Micro Dapp and Frames", "keywords": "solidity, smart contract, developer, micro dApp, frame, UX, website, front-end, UI, development, USDC, DEGEN"}
 
 TO EXTRACT THE KEYWORDS FOLLOW THE BELOW STEPS:
 1. Understand the text and filter out the jokes and non-work related conversation.
