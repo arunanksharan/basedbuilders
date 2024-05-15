@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import ogImage from "../app/assets/og.png";
 import QueryCard from "@/components/queryCard/QueryCard";
+import { error } from "console";
 
 // either Static metadata
 
@@ -74,7 +75,12 @@ const fetchCasts = async () => {
 };
 
 export default async function HomePage() {
-  let casts = (await fetchCasts()) as unknown as CastsData;
+  let casts = [] as unknown as CastsData;
+  try {
+    casts = (await fetchCasts()) as unknown as CastsData;
+  } catch (er) {
+    console.log(error);
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0">
