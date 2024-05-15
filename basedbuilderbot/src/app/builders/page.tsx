@@ -8,16 +8,10 @@ const fetchProfiles = async () => {
 };
 
 async function Builders() {
-  let builders = (await fetchProfiles()) as unknown as {
-    profiles: {
-      _id: string;
-      tags: string[];
-      FID: string;
-      raw_designation: string;
-      raw_tags: string;
-    }[];
-  };
+  let builders = (await fetchProfiles()) as unknown as Profiles;
+
   console.log(builders);
+
   return (
     <main className="flex w-[660px] min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0 max-[425px]:w-full">
       <div className="flex  gap-4 w-full flex-wrap justify-center">
@@ -26,17 +20,15 @@ async function Builders() {
             <BuilderCard
               key={idx + "builder"}
               user={{
-                display_name: "John Swaroop",
-                pfp: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/ac5ae44f-ee9c-49a1-51b6-73857d9ad700/rectcrop3",
-                username: "johnswaroop",
+                display_name: ele.author?.display_name as string,
+                pfp: ele.author?.pfp_url as string,
+                username: ele.author?.username as string,
               }}
               skill={{
-                designation: ele.raw_designation,
-                tags: [
-                  ...ele.raw_tags.split(",").map((sk) => {
-                    return sk.trim();
-                  }),
-                ],
+                designation: ele.data.raw_designation as string,
+                tags: (ele.data.raw_tags || "").split(",").map((sk) => {
+                  return sk.trim();
+                }),
               }}
             />
           );
