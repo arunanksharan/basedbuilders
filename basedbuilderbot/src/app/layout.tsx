@@ -52,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <section className="mx-auto w-fit px-4 max-w-6xl sm:px-6 xl:max-w-4xl xl:px-16">
+        <section className="mx-auto w-full px-4 max-w-6xl sm:px-6 xl:max-w-4xl xl:px-16">
           <div className="page-container flex flex-col  w-full">
             <header className=" flex flex-row justify-between items-center py-10 max-[425px]:py-3">
               <Logo />

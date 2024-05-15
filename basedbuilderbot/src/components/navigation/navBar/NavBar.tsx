@@ -42,6 +42,14 @@ const Navbar = () => {
       </a>
       <p
         className="hidden sm:block font-normal text-gray-900 dark:text-gray-400 cursor-pointer"
+        onClick={() => [
+          window.open("https://warpcast.com/~/channel/basedbuilders", "_blank"),
+        ]}
+      >
+        Join us
+      </p>
+      <p
+        className="hidden sm:block font-normal text-gray-900 dark:text-gray-400 cursor-pointer"
         onClick={() => [window.open(CAST_URL, "_blank")]}
       >
         Create a post

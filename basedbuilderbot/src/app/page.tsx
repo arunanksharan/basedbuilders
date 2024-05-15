@@ -84,8 +84,8 @@ export default function HomePage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0">
-      <div className="flex flex-col gap-6 w-[660px]">
+    <main className="flex w-[600px] max-[670px]:w-full min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0">
+      <div className="flex flex-col gap-6 w-full">
         {casts.casts.map((ct, idx) => {
           return (
             <QueryCard

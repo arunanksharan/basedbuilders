@@ -12,7 +12,7 @@ const Hamburger = () => {
         onClick={() => {
           setvisible(true);
         }}
-        className="flex absolute right-0 top-0 p-5 cursor-pointer hover:opacity-50"
+        className=" absolute right-0 top-0 p-5 cursor-pointer hover:opacity-50 hidden max-[425px]:flex"
       >
         <GiHamburgerMenu />
       </div>

@@ -24,7 +24,10 @@ function Builders() {
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0">
         <div className="flex flex-col gap-6 w-full">
-          <div role="status" className="flex justify-center w-[660px] pt-8">
+          <div
+            role="status"
+            className="flex justify-center w-[660px] max-[670px]:w-full pt-8"
+          >
             <svg
               aria-hidden="true"
               className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -50,21 +53,26 @@ function Builders() {
 
   if (builders.profiles.length == 0) {
     return (
-      <main className="flex w-[660px] mt-4  flex-col items-center justify-between  max-[900px]:p-0  bg-gray-900 gap-4 p-4 rounded-lg">
+      <main className="flex w-[600px] max-[670px]:w-full  mt-4  flex-col items-center justify-between   bg-gray-900 gap-4 p-4 rounded-lg">
         <div className="flex flex-col  w-full">
           <div
             role="status"
             className="flex flex-col items-center w-full h-fit"
           >
-            <h1 className="font-semibold">
+            <h1 className="font-semibold text-center">
               We are working to get the best BasedBuilders !{" "}
             </h1>
-            <a
-              className="underline text-blue-700"
-              href="https://warpcast.com/~/channel/basedbuilders"
+            <p
+              className="underline "
+              onClick={() => {
+                window.open(
+                  "https://warpcast.com/~/channel/basedbuilders",
+                  "_blank"
+                );
+              }}
             >
               Join Us
-            </a>
+            </p>
           </div>
         </div>
       </main>
@@ -72,7 +80,7 @@ function Builders() {
   }
 
   return (
-    <main className="flex w-[660px] min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0 max-[425px]:w-full">
+    <main className="flex w-[600px] min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0 max-[425px]:w-full">
       <div className="flex  gap-4 w-full flex-wrap justify-center">
         {builders &&
           [...builders.profiles].map((ele, idx) => {
