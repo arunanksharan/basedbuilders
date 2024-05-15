@@ -2,10 +2,10 @@ import {
   CastParamType,
   NeynarAPIClient,
   isApiErrorResponse,
-} from "@neynar/nodejs-sdk";
-import axios from "axios";
-import dbconfig from "../../app/utils/dbconfig";
-import SaveCast from "../../app/models/savecast";
+} from '@neynar/nodejs-sdk';
+import axios from 'axios';
+import dbconfig from '../../app/utils/dbconfig';
+import SaveCast from '../../app/models/savecast';
 
 type SaveCastType = {
   username: string;
@@ -22,14 +22,14 @@ const client = new NeynarAPIClient(NEYNAR_API_KEY as string); // Replace with yo
 const SIGNER = SIGNER_KEY as string;
 
 export const gm = async () => {
-  let res = await client.publishCast(SIGNER, "gm", {
-    channelId: "basedbuilders",
+  let res = await client.publishCast(SIGNER, 'gm', {
+    channelId: 'basedbuilders',
   });
   return res;
 };
 
 export const recast = async (castHash: string) => {
-  let res = await client.publishReactionToCast(SIGNER, "recast", castHash);
+  let res = await client.publishReactionToCast(SIGNER, 'recast', castHash);
   if (!res.success) {
     return false;
   }
@@ -49,7 +49,7 @@ export const castToChannel = async (
   embeds?: { url: string }[]
 ) => {
   let config: {} = {
-    channelId: "basedbuilders",
+    channelId: 'basedbuilders',
   };
 
   let messageTemplate = `${message.text}\nCasted by: @${message.username}`;
@@ -76,16 +76,16 @@ export const castToChannel = async (
   config = { ...config, embeds: embedsUrls };
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
-  console.log("Cast to channel response:", res);
+  console.log('Cast to channel response:', res);
   await saveCast(message, initMessage, castUrl, embedsUrls);
   return res;
 };
 
 export const process_message = (message: string) => {
-  let result = message.replace(/@basedbuilders/g, "");
-  result = result.replace(/@undefined/g, "").trim();
-  result = result.replace("Description", "").trim();
-  console.log("Processed message:", result);
+  let result = message.replace(/@basedbuilders/g, '');
+  result = result.replace(/@undefined/g, '').trim();
+  result = result.replace('Description', '').trim();
+  console.log('Processed message:', result);
   return result;
 };
 
@@ -113,7 +113,7 @@ async function saveCast(
       display_name: author.display_name,
       pfp_url: author.pfp_url,
       castUrl: castUrl,
-      embed: embeds ? JSON.stringify(embeds) : "",
+      embed: embeds ? JSON.stringify(embeds) : '',
     };
 
     let savecast = new SaveCast({
@@ -123,9 +123,9 @@ async function saveCast(
     let db_res = await savecast.save();
 
     if (db_res) {
-      console.log("Cast saved", cast);
+      console.log('Cast saved', cast);
     }
   } catch (er) {
-    console.log("save error : ", er);
+    console.log('save error : ', er);
   }
 }
