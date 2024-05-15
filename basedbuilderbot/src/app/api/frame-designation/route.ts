@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
   //fetch user details
   //create user entry
-  let profile = Profile.findOne({ FID: data.untrustedData.fid });
+  let profile = await Profile.findOne({ FID: data.untrustedData.fid });
 
   if (!profile) {
     let newProfile = new Profile({
