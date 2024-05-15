@@ -21,7 +21,7 @@ function BuilderCard({
   };
 }) {
   return (
-    <div className="flex flex-col w-[300px] bg-gray-900 gap-4 p-4 rounded-lg">
+    <div className="flex flex-col max-w-[250px] bg-gray-900 gap-4 p-4 rounded-lg">
       {/* query */}
       <span className="flex items-center gap-2 max-[425px]:gap-1">
         <picture>
@@ -53,8 +53,8 @@ function BuilderCard({
       {/* query */}
       <p className="max-[425px]:text-xs">{skill.designation}</p>
       {/* tags */}
-      <div className="flex gap-2 mb-4">
-        {skill.tags.map((tag, idx) => {
+      <div className="flex gap-2 mb-4 w-full overflow-hidden">
+        {skill.tags.slice(0, 3).map((tag, idx) => {
           return (
             <span
               className="bg-gray-600 text-white text-xs py-1 px-2 rounded-md max-[425px]:text-[10px]"

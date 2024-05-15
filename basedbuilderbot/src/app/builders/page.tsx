@@ -81,7 +81,7 @@ function Builders() {
 
   return (
     <main className="flex w-[600px] min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0 max-[425px]:w-full">
-      <div className="flex  gap-4 w-full flex-wrap justify-center">
+      <div className="flex  gap-4 w-full flex-wrap">
         {builders &&
           [...builders.profiles].map((ele, idx) => {
             return (
