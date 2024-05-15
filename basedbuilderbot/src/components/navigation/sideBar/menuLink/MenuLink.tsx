@@ -1,8 +1,8 @@
-'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { use } from 'react';
-import { IconType } from 'react-icons';
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { use } from "react";
+import { IconType } from "react-icons";
 
 interface MenuLinkProps {
   Icon: React.ElementType; // This accepts a component
@@ -20,7 +20,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   return (
     <Link
       className={`menuitem ${
-        pathname === path ? 'border border-gray-200' : ''
+        pathname === path ? "bg-[#ffffff28] rounded-xl" : ""
       } dark:text-white font-medium text-gray-900 group flex gap-2 p-2 text-sm leading-6 m-4`}
       href={path}
     >

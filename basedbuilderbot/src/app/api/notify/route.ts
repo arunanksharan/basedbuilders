@@ -43,11 +43,14 @@ export async function POST(request: Request) {
 
     let cast_res = await castToChannel(
       {
-        //   display_name: payload.data.author.display_name,
+        display_name: payload.data.author.display_name,
+        pfp_url: payload.data.author.pfp_url,
         username: username,
         text: message,
+        fid: payload.data.author.fid,
       },
       castUrl,
+      payload.data.hash,
       payload.data.embeds
     );
     console.log("Recast response:", cast_res);

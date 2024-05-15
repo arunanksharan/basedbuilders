@@ -37,8 +37,15 @@ export const recast = async (castHash: string) => {
 };
 
 export const castToChannel = async (
-  message: { username: string; text: string },
+  message: {
+    username: string;
+    text: string;
+    fid: number;
+    display_name: string;
+    pfp_url: string;
+  },
   castUrl: string,
+  hash: string,
   embeds?: { url: string }[]
 ) => {
   let config: {} = {
@@ -46,12 +53,20 @@ export const castToChannel = async (
   };
 
   let messageTemplate = `${message.text}\nCasted by: @${message.username}`;
-  let embedsUrls: { url: string }[] = [];
+  let initMessage = messageTemplate;
+  let embedsUrls: { [label: string]: any }[] = [];
 
   if (messageTemplate.length >= 320) {
     // messageTemplate = `Cast link : ${castUrl}\nCasted by: @${message.username}`;
     messageTemplate = `Casted by: @${message.username}`;
-    embedsUrls = [{ url: castUrl }];
+    embedsUrls = [
+      {
+        cast_id: {
+          fid: message.fid,
+          hash: hash,
+        },
+      },
+    ];
   }
 
   if (embeds && embeds.length > 0) {
@@ -62,7 +77,7 @@ export const castToChannel = async (
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
   console.log("Cast to channel response:", res);
-  await saveCast(message, messageTemplate, castUrl, embedsUrls);
+  await saveCast(message, initMessage, castUrl, embedsUrls);
   return res;
 };
 
@@ -84,19 +99,21 @@ export const fetch_parent_cast = async (parentHash: string) => {
 };
 
 async function saveCast(
-  message: { username: string; text: string },
+  author: { username: string; display_name: string; pfp_url: string },
   messageTemplate: string,
   castUrl: string,
-  embeds: { url: string }[] | undefined
+  embeds: { url?: string; hash?: string }[]
 ) {
   try {
     await dbconfig();
 
     let cast = {
-      username: message.username,
+      username: author.username,
       message: messageTemplate,
+      display_name: author.display_name,
+      pfp_url: author.pfp_url,
       castUrl: castUrl,
-      embed: embeds || [],
+      embed: embeds ? JSON.stringify(embeds) : "",
     };
 
     let savecast = new SaveCast({

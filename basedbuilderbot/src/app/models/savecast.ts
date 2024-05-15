@@ -6,6 +6,14 @@ const saveCastSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    display_name: {
+      type: String,
+      required: true,
+    },
+    pfp_url: {
+      type: String,
+      required: true,
+    },
     message: {
       type: String,
       required: true,
@@ -14,14 +22,16 @@ const saveCastSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    embed: [
-      {
-        url: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    embed: {
+      type: String,
+      required: true,
+    },
+    genTitle: {
+      type: String,
+    },
+    genTags: {
+      type: [String],
+    },
   },
   {
     timestamps: true, // Optional: Adds createdAt and updatedAt fields

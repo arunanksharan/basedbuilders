@@ -1,24 +1,19 @@
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 
 const Logo = () => {
   return (
     <div>
       <a aria-label="Bountycaster" href="/">
         <div className="flex items-center justify-between">
-          <div className="mr-3">
-            <Image
+          <picture className="mr-3">
+            <img
               alt="Bountycaster"
-              loading="lazy"
-              width="64"
-              height="64"
-              decoding="async"
-              data-nimg="1"
-              className="color:transparent"
+              className="color:transparent h-[48px] w-[48px] max-[425px]:h-[22px] max-[425px]:w-[22px]"
               src="/BB-logo.png"
             />
-          </div>
-          <div className="h-8 text-2xl font-semibold sm:block">
+          </picture>
+          <div className="h-8 max-[425px]:h-auto text-2xl font-semibold max-[425px]:font-normal sm:block max-[425px]:text-lg">
             BasedBuilders
           </div>
         </div>
