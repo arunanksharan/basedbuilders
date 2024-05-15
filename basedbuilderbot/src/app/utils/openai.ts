@@ -7,9 +7,9 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI();
 export async function getQueryDetails({ cast }: { cast: string }) {
-  console.log('oooooooooooooooooooooooooooooooo');
+  // console.log('oooooooooooooooooooooooooooooooo');
   //   console.log('8 cast', cast);
-  console.log('oooooooooooooooooooooooooooooooo');
+  // console.log('oooooooooooooooooooooooooooooooo');
 
   const aiMessages: ChatCompletionMessageParam[] = [
     { role: 'system', content: EXTRACT_KEYWORDS },

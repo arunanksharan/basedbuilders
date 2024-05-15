@@ -6,6 +6,7 @@ import {
 import axios from 'axios';
 import dbconfig from '../../app/utils/dbconfig';
 import SaveCast from '../../app/models/savecast';
+import { getQueryDetails } from './openai';
 
 type SaveCastType = {
   username: string;
@@ -77,7 +78,13 @@ export const castToChannel = async (
 
   let res = await client.publishCast(SIGNER, messageTemplate, config);
   console.log('Cast to channel response:', res);
-  await saveCast(message, initMessage, castUrl, embedsUrls);
+
+  const openAiRes = await getQueryDetails({ cast: initMessage });
+  // console.log('openAiRes', openAiRes);
+
+  const gentitle: string = openAiRes.title;
+  const gentags: string[] = openAiRes.keywords;
+  await saveCast(message, initMessage, castUrl, embedsUrls, gentitle, gentags);
   return res;
 };
 
@@ -102,7 +109,9 @@ async function saveCast(
   author: { username: string; display_name: string; pfp_url: string },
   messageTemplate: string,
   castUrl: string,
-  embeds: { url?: string; hash?: string }[]
+  embeds: { url?: string; hash?: string }[],
+  genTitle: string,
+  genTags: string[]
 ) {
   try {
     await dbconfig();
@@ -114,6 +123,8 @@ async function saveCast(
       pfp_url: author.pfp_url,
       castUrl: castUrl,
       embed: embeds ? JSON.stringify(embeds) : '',
+      genTitle: genTitle,
+      genTags: genTags,
     };
 
     let savecast = new SaveCast({
