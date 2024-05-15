@@ -40,14 +40,17 @@ export async function POST(request: NextRequest) {
 
   //fetch user details
   //create user entry
+  let profile = Profile.findOne({ FID: data.untrustedData.fid });
 
-  let profile = new Profile({
-    FID: data.untrustedData.fid,
-  });
+  if (!profile) {
+    let newProfile = new Profile({
+      FID: data.untrustedData.fid,
+    });
 
-  let dbres = await profile.save();
-  if (dbres) {
-    console.log("Profile intiated");
+    let dbres = await newProfile.save();
+    if (dbres) {
+      console.log("Profile intiated");
+    }
   }
 
   const newHeaders = new Headers();
