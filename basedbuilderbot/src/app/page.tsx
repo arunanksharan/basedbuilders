@@ -59,7 +59,10 @@ export default function HomePage() {
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-4 max-[900px]:p-0">
         <div className="flex flex-col gap-6 w-full">
-          <div role="status" className="flex justify-center w-[660px] pt-8">
+          <div
+            role="status"
+            className="flex justify-center w-[660px] pt-8 max-[425px]:pt-[40vh] max-[425px]:w-full"
+          >
             <svg
               aria-hidden="true"
               className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

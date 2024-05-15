@@ -26,7 +26,7 @@ function Builders() {
         <div className="flex flex-col gap-6 w-full">
           <div
             role="status"
-            className="flex justify-center w-[660px] max-[670px]:w-full pt-8"
+            className="flex justify-center w-[660px] max-[670px]:w-full pt-8 max-[425px]:pt-[40vh]"
           >
             <svg
               aria-hidden="true"

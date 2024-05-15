@@ -47,15 +47,24 @@ const Hamburger = () => {
           </span>
         </picture>
         <div className="flex flex-col gap-3 mt-6">
-          <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
+          <a
+            href="/"
+            className="text-sm text-gray-400 hover:text-white cursor-pointer"
+          >
             Open Queries
-          </span>
-          <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
+          </a>
+          <a
+            href="/builders"
+            className="text-sm text-gray-400 hover:text-white cursor-pointer"
+          >
             Builders
-          </span>
-          <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
+          </a>
+          <a
+            href="/faq"
+            className="text-sm text-gray-400 hover:text-white cursor-pointer"
+          >
             FAQs
-          </span>
+          </a>
 
           <span
             onClick={() => {

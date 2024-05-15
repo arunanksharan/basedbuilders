@@ -64,12 +64,12 @@ function QueryCard({
       )}
       <p className="max-[425px]:text-xs text-gray-400 text-sm">{query.text}</p>
       {/* tags */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 w-full flex-wrap h-auto">
         {query.tags[0] &&
           query.tags[0].split(",").map((tag, idx) => {
             return (
               <span
-                className="bg-gray-600 text-white text-xs py-1 px-2 rounded-md max-[425px]:text-[10px]"
+                className="bg-gray-600 text-white min-w-fit text-xs py-1 px-2 rounded-md max-[425px]:text-[10px]"
                 key={"tag" + idx}
               >
                 {tag.trim()}

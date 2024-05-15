@@ -63,7 +63,7 @@ export default function RootLayout({
               <div className=" menu min-w-[25%]  bg-[var(--bgSoft)] p-2 min-h-screen max-[900px]:hidden">
                 <SideBar />
               </div>
-              <div className="content flex flex-col w-full  p-1">
+              <div className="content flex flex-col w-full  p-1 max-[425px]:mt-3">
                 {children}
                 <Footer></Footer>
               </div>
