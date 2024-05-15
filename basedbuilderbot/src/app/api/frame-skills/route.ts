@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
   }
 
   const newHeaders = new Headers();
-  newHeaders.set("Content-Type", `text/html; charset=UTF-8`);
+  newHeaders.set("Content-Type", `text/html`);
   return new Response(page, {
     status: 200,
     headers: newHeaders,
