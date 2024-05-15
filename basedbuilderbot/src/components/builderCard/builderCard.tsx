@@ -21,7 +21,12 @@ function BuilderCard({
   };
 }) {
   return (
-    <div className="flex flex-col max-w-[250px] bg-gray-900 gap-4 p-4 rounded-lg">
+    <div
+      onClick={() => {
+        window.open(`https://warpcast.com/${user.username}`, "_blank");
+      }}
+      className="flex flex-col w-full bg-gray-900 gap-4 p-4 rounded-lg mx-auto  cursor-pointer"
+    >
       {/* query */}
       <span className="flex items-center gap-2 max-[425px]:gap-1">
         <picture>
@@ -37,23 +42,11 @@ function BuilderCard({
             @{user.username}
           </p>
         </span>
-        <a
-          className="flex gap-1 text-[12px] text-gray-500 ml-auto mb-auto"
-          href="https://warpcast.com/phil/0x9450f4e8"
-        >
-          <Image
-            className="object-contain mt-2"
-            height={18}
-            width={18}
-            src={"/warpcast.png"}
-            alt=""
-          />{" "}
-        </a>
       </span>
       {/* query */}
       <p className="max-[425px]:text-xs">{skill.designation}</p>
       {/* tags */}
-      <div className="flex gap-2 mb-4 w-full overflow-hidden">
+      <div className="flex gap-2 mb-2 w-full overflow-hidden mt-auto">
         {skill.tags.slice(0, 3).map((tag, idx) => {
           return (
             <span
