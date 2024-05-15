@@ -19,6 +19,14 @@ const Hamburger = () => {
     );
   }
 
+  const template = `Description (what do you wanna built out? Being specific & detailed about your requirements will help get better reponses)
+
+@basedbuildersbot `;
+
+  let CAST_URL = `https://warpcast.com/~/compose?text=${encodeURIComponent(
+    template
+  )}`;
+
   return (
     <div className="hamburger min-[425px]:hidden flex fixed top-0 right-0 w-screen h-screen">
       <div className="flex flex-col w-[80%] mr-auto h-full bg-black border-r-[#0160F6] border-r-[2px] p-3 pr-0">
@@ -48,10 +56,13 @@ const Hamburger = () => {
           <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
             FAQs
           </span>
-          <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
-            Subscribe
-          </span>
-          <span className="text-sm text-gray-400 hover:text-white cursor-pointer">
+
+          <span
+            onClick={() => {
+              window.open(CAST_URL, "_blank");
+            }}
+            className="text-sm text-gray-400 hover:text-white cursor-pointer"
+          >
             Create a post
           </span>
         </div>

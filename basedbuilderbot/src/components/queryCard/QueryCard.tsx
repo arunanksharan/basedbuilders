@@ -18,10 +18,12 @@ function QueryCard({
   query: {
     text: string;
     link: string;
+    title: string;
+    tags: string[];
   };
 }) {
   return (
-    <div className="flex flex-col w-fit gap-4 border-gray-700 border-b-[1px] ">
+    <div className="flex flex-col  gap-4 border-gray-700 border-b-[1px] w-full">
       {/* query */}
       <span className="flex items-center gap-2 max-[425px]:gap-1">
         <picture>
@@ -31,7 +33,12 @@ function QueryCard({
             alt=""
           />
         </picture>
-        <span className="flex gap-2 max-[425px]:flex-col max-[425px]:gap-0 max-[425px]:ml-1">
+        <span
+          onClick={() => {
+            window.open(`https://warpcast.com/${user.username}`, "_blank");
+          }}
+          className="flex gap-2 max-[425px]:flex-col max-[425px]:gap-0 max-[425px]:ml-1 cursor-pointer"
+        >
           <h1 className="max-[425px]:text-sm">{user.display_name}</h1>
           <p className="text-gray-500 max-[425px]:text-[12px]">
             <span className="max-[425px]:hidden">|</span> @{user.username}
@@ -52,23 +59,23 @@ function QueryCard({
         </a>
       </span>
       {/* query */}
-      <p className="max-[425px]:text-xs">
-        To create an array of random objects in a MongoDB model, you can define
-        a schema in a MongoDB-compatible modeling library like Mongoose for
-        Node.js. Here`s an example of how you could define such a schema:
-      </p>
+      {query.title && (
+        <p className="max-[425px]:text-xs font-medium ">{query.title}</p>
+      )}
+      <p className="max-[425px]:text-xs text-gray-400 text-sm">{query.text}</p>
       {/* tags */}
       <div className="flex gap-2 mb-4">
-        {["frames.js", "react", "solidity", "js"].map((tag, idx) => {
-          return (
-            <span
-              className="bg-gray-600 text-white text-xs py-1 px-2 rounded-md max-[425px]:text-[10px]"
-              key={"tag" + idx}
-            >
-              {tag}
-            </span>
-          );
-        })}
+        {query.tags[0] &&
+          query.tags[0].split(",").map((tag, idx) => {
+            return (
+              <span
+                className="bg-gray-600 text-white text-xs py-1 px-2 rounded-md max-[425px]:text-[10px]"
+                key={"tag" + idx}
+              >
+                {tag.trim()}
+              </span>
+            );
+          })}
       </div>
     </div>
   );

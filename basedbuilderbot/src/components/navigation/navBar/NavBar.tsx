@@ -10,6 +10,15 @@ import {
 
 const Navbar = () => {
   const pathname = usePathname();
+
+  const template = `Description (what do you wanna built out? Being specific & detailed about your requirements will help get better reponses)
+
+  @basedbuildersbot `;
+
+  let CAST_URL = `https://warpcast.com/~/compose?text=${encodeURIComponent(
+    template
+  )}`;
+
   return (
     <div className="flex items-center leading-5 space-x-4 sm:space-x-6 ">
       {/* <a
@@ -24,24 +33,19 @@ const Navbar = () => {
       >
         Builders
       </a> */}
-      <a
-        className="hidden sm:block font-normal text-gray-900 dark:text-gray-400"
-        href="/subscribe"
-      >
-        Subscribe
-      </a>
+
       <a
         className="hidden sm:block font-normal text-gray-900 dark:text-gray-400"
         href="/faq"
       >
         FAQs
       </a>
-      <a
-        className="hidden sm:block font-normal text-gray-900 dark:text-gray-400"
-        href="/start"
+      <p
+        className="hidden sm:block font-normal text-gray-900 dark:text-gray-400 cursor-pointer"
+        onClick={() => [window.open(CAST_URL, "_blank")]}
       >
         Create a post
-      </a>
+      </p>
     </div>
   );
 };

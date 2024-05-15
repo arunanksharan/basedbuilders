@@ -20,25 +20,38 @@ const options = {
 };
 
 export async function GET(request: NextRequest) {
-  console.log("Request received: GET casts");
-  await dbconfig();
-  let dbres = await Profiles.find({});
-  options.params.fids = dbres
-    .map((ele) => {
-      return ele.FID;
-    })
-    .join(",");
+  try {
+    console.log("Request received: GET casts");
+    await dbconfig();
+    let dbres = await Profiles.find({});
 
-  let list = await axios.request(options);
+    options.params.fids = dbres
+      .map((ele) => {
+        return ele.FID;
+      })
+      .join(",");
 
-  return new Response(
-    JSON.stringify({
-      profiles: dbres.map((ele, idx) => {
-        return { data: ele, author: list.data.users[idx] };
+    let list = await axios.request(options);
+
+    return new Response(
+      JSON.stringify({
+        profiles: dbres.map((ele, idx) => {
+          return { data: ele, author: list.data.users[idx] };
+        }),
       }),
-    }),
-    {
-      status: 200,
-    }
-  );
+      {
+        status: 200,
+      }
+    );
+  } catch (er) {
+    console.log(er);
+    return new Response(
+      JSON.stringify({
+        profiles: [],
+      }),
+      {
+        status: 200,
+      }
+    );
+  }
 }
