@@ -5,7 +5,7 @@ import SaveCast from "@/app/models/savecast";
 import dbconfig from "../../utils/dbconfig";
 import Profile from "../../models/profile";
 
-import ogImage from "../../assets/og.png";
+import ogImage from "../../assets/og-final.png";
 
 let OG_IMAGE = ogImage.src;
 
