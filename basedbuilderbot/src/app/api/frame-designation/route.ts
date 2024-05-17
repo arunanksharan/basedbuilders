@@ -21,7 +21,7 @@ let page = `<html lang="en">
     <meta property="og:image" content="${CLIENT_URL}/${OG_IMAGE}">
     <meta property="fc:frame:image" content="${CLIENT_URL}/${OG_IMAGE}" />
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:input:text" content="Enter your Designation" />
+    <meta property="fc:frame:input:text" content="Enter your Role" />
     <meta property="fc:frame:button:1" content="Save & Continue" />
     <meta property="fc:frame:button:1:action" content="post" />
     <meta property="fc:frame:button:1:post_url" content="${CLIENT_URL}/api/frame-skills" />
