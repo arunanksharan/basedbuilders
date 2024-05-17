@@ -22,6 +22,7 @@ let CAST_URL = `https://warpcast.com/~/compose?text=${encodeURIComponent(
 
 let OG_IMAGE = ogImage.src;
 
+//updated client url
 //replace with env for HOST
 let CLIENT_URL = process.env.CLIENT_URL;
 export const metadata = {
