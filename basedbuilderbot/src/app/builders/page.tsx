@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import BuilderCard from "@/components/builderCard/builderCard";
 
 const fetchProfiles = async () => {
-  let res = await fetch(`${process.env.CLIENT_URL}/api/profiles`);
+  let res = await fetch(`/api/profiles`);
   res = await res.json();
   return res;
 };

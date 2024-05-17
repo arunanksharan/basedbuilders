@@ -39,7 +39,7 @@ interface CastsData {
 // Context/state management
 
 const fetchCasts = async () => {
-  let res = await fetch(`${process.env.CLIENT_URL}/api/casts`);
+  let res = await fetch(`/api/casts`);
   res = await res.json();
   return res;
 };
