@@ -20,6 +20,9 @@ let page = `<html lang="en">
     <title>Meta Tags Example</title>
     <meta property="fc:frame:image" content="${CLIENT_URL}/${OG_IMAGE}" />
     <meta property="fc:frame" content="vNext" />
+    <meta property="fc:frame:button:1" content="Visit BasedBuilders" />
+    <meta property="fc:frame:button:1:action" content="link" />
+    <meta property="fc:frame:button:1:target" content="${CLIENT_URL}" />
 </head>
 <body>
     <h1>Welcome to the Meta Tags Example Page</h1>
